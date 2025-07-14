@@ -1,4 +1,4 @@
-icdocument.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const courses = [
         // Primer semestre
         { name: 'Quimica y sociedad', category: 'other', semester: 1, prerequisites: [] },
