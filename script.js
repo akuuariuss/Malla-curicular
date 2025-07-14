@@ -21,13 +21,13 @@ icdocument.addEventListener('DOMContentLoaded', () => {
         { name: 'Introducción a electrotecnia', category: 'electrical-engineering', semester: 4, prerequisites: ['Calculo en una variable', 'Algebra lineal', 'Física general 1'] },
         { name: 'Matemáticas 4', category: 'mathematics', semester: 4, prerequisites: ['Matemáticas 3'] },
         { name: 'Física general 3', category: 'physics', semester: 4, prerequisites: ['Física general 1'] },
-        { name: 'Mecánica general', category: 'mecanic', semester: 4, prerequisites: ['Física general 1'] },
+        { name: 'Mecánica general', category: 'other', semester: 4, prerequisites: ['Física general 1'] },
 
         // Quinto semestre
         { name: 'Redes 1', category: 'electrical-engineering', semester: 5, prerequisites: ['Introducción a electrotecnia'] },
         { name: 'Análisis numérico', category: 'mathematics', semester: 5, prerequisites: ['Matemáticas 4'] },
         { name: 'Estadística', category: 'mathematics', semester: 5, prerequisites: ['Matemáticas 3'] },
-        { name: 'Resistencia de materiales generales', category: 'mecanic', semester: 5, prerequisites: ['Mecánica general'] },
+        { name: 'Resistencia de materiales generales', category: 'other', semester: 5, prerequisites: ['Mecánica general'] },
 
         // Sexto semestre
         { name: 'Redes 2', category: 'electrical-engineering', semester: 6, prerequisites: ['Redes 1'] },
