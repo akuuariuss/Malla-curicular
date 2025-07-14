@@ -41,17 +41,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to check if a course's prerequisites are met
     function arePrerequisitesMet(courseName) {
         const course = courses.find(c => c.name === courseName);
-        if (!course) return false; // Should not happen
+        if (!course) return false;
 
         if (course.prerequisites.length === 0) {
-            return true; // No prerequisites, so they are met
+            return true;
         }
 
-        // Check if all prerequisites are marked as completed
         return course.prerequisites.every(prereq => {
             return localStorage.getItem(prereq) === 'completed';
         });
     }
+
+    // NEW FUNCTION: Calculate semester progress
+    function calculateSemesterProgress(semesterNumber) {
+        const semesterCourses = courses.filter(course => course.semester === semesterNumber);
+        const totalCoursesInSemester = semesterCourses.length;
+
+        if (totalCoursesInSemester === 0) {
+            return 0; // Avoid division by zero if a semester has no courses
+        }
+
+        const completedCoursesInSemester = semesterCourses.filter(course => {
+            return localStorage.getItem(course.name) === 'completed';
+        }).length;
+
+        return (completedCoursesInSemester / totalCoursesInSemester) * 100;
+    }
+
 
     // Function to render courses
     function renderCourses() {
@@ -69,51 +85,46 @@ document.addEventListener('DOMContentLoaded', () => {
         // Render each semester
         Object.keys(semesters).sort((a, b) => a - b).forEach(semesterNum => {
             const semesterTitle = document.createElement('h2');
-            semesterTitle.textContent = `Semestre ${semesterNum}`;
+            const progress = calculateSemesterProgress(parseInt(semesterNum)); // Calculate progress
+            semesterTitle.innerHTML = `Semestre ${semesterNum} <span class="semester-progress">(${progress.toFixed(0)}%)</span>`; // Add percentage
             courseGrid.appendChild(semesterTitle);
 
             const semesterContainer = document.createElement('div');
-            semesterContainer.classList.add('semester-container'); // Add a class for semester grouping
+            semesterContainer.classList.add('semester-container');
             courseGrid.appendChild(semesterContainer);
 
             semesters[semesterNum].forEach(course => {
                 const courseCell = document.createElement('div');
                 courseCell.classList.add('course-cell');
-                courseCell.classList.add(course.category); // Add category class for styling
+                courseCell.classList.add(course.category);
 
-                // Check if the course was previously completed (from local storage)
                 const isCompleted = localStorage.getItem(course.name) === 'completed';
                 if (isCompleted) {
                     courseCell.classList.add('completed');
                 }
 
-                // Check if prerequisites are met
                 const canBeTaken = arePrerequisitesMet(course.name);
-                if (!canBeTaken && !isCompleted) { // If not completed and prereqs not met
+                if (!canBeTaken && !isCompleted) {
                     courseCell.classList.add('locked');
-                    courseCell.title = 'Prerequisites not met'; // Add a tooltip
+                    courseCell.title = `Prerrequisitos no cumplidos: ${course.prerequisites.join(', ')}`;
                 }
 
                 courseCell.textContent = course.name;
                 courseCell.addEventListener('click', () => {
-                    // Only allow clicking if prerequisites are met OR if it's already completed
                     if (courseCell.classList.contains('locked')) {
-                        alert(`Cannot mark "${course.name}" as completed. Please complete its prerequisites first: ${course.prerequisites.join(', ')}`);
-                        return; // Exit if locked
+                        alert(`No se puede marcar "${course.name}" como completado. Por favor, complete sus prerrequisitos primero: ${course.prerequisites.join(', ')}`);
+                        return;
                     }
 
-                    // Toggle 'completed' class
                     courseCell.classList.toggle('completed');
 
-                    // Update completion status in local storage
                     if (courseCell.classList.contains('completed')) {
                         localStorage.setItem(course.name, 'completed');
                     } else {
                         localStorage.removeItem(course.name);
                     }
 
-                    // Re-render courses to update locked/unlocked states of dependent courses
-                    renderCourses();
+                    renderCourses(); // Re-render to update percentages and locked states
                 });
                 semesterContainer.appendChild(courseCell);
             });
