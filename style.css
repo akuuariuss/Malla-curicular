@@ -82,6 +82,10 @@ h2 {
     background-color: #4682b4; /* Steel Blue */
     color: #f0f0f0; /* Light text for contrast */
 }
+.mecanic {
+    background-color: #8A9A5B
+    color: #f0f0f0; /* Light text for contrast */
+}
 
 .other {
     background-color: #696969; /* Dim gray */
