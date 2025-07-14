@@ -1,0 +1,31 @@
+<body>
+  <h1>Malla Curricular</h1>
+  <div class="grid">
+    <!-- Ejemplo con prerrequisitos como atributo personalizado -->
+    <div class="semester">
+      <h2>Semestre 1</h2>
+      <div class="course gray" data-prereq="Sin prerrequisitos">Química y Sociedad</div>
+      <div class="course math" data-prereq="Sin prerrequisitos">Introducción al Cálculo</div>
+      <div class="course math" data-prereq="Sin prerrequisitos">Introducción al Álgebra</div>
+      <div class="course gray" data-prereq="Sin prerrequisitos">Introducción a la Física</div>
+    </div>
+
+    <div class="semester">
+      <h2>Semestre 2</h2>
+      <div class="course gray" data-prereq="Sin prerrequisitos">Programación</div>
+      <div class="course math" data-prereq="Introducción al Cálculo">Cálculo en una Variable</div>
+      <div class="course math" data-prereq="Introducción al Álgebra">Álgebra Lineal</div>
+      <div class="course gray" data-prereq="Introducción a la Física">Física General 1</div>
+    </div>
+
+    <!-- ... resto de los semestres igual, cambia `title="..."` por `data-prereq="..."` ... -->
+
+    <!-- Modal o tooltip -->
+    <div id="tooltip" class="tooltip hidden">
+      <span id="tooltip-text"></span>
+      <button id="close-tooltip">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
