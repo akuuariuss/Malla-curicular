@@ -64,3 +64,41 @@ h1 {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+/* ... (previous CSS rules) ... */
+
+.course-cell.locked {
+    background-color: #f0f0f0; /* Lighter gray to indicate locked */
+    color: #999; /* Faded text */
+    cursor: not-allowed; /* Change cursor to "not allowed" */
+    border-style: dashed; /* Dashed border for locked courses */
+    opacity: 0.8;
+}
+
+.course-cell.locked:hover {
+    transform: none; /* Prevent hover effect on locked courses */
+    box-shadow: none;
+}
+
+/* New: Styling for semester containers to organize the grid */
+.semester-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    width: 100%; /* Take full width of parent */
+    margin-bottom: 30px; /* Space between semesters */
+    border: 1px solid #eee; /* Light border around each semester */
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+h2 {
+    width: 100%; /* Make semester titles span full width */
+    text-align: left;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+}
