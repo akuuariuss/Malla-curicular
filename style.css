@@ -2,32 +2,64 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: black;
+    align-items: center; /* This centers the overall content like h1, course-grid */
+    background-color: #000000; /* Pure Black Background */
     margin: 20px;
+    color: #f0f0f0; /* Default light text color for better contrast */
 }
 
 h1 {
-    color: #f0f0f0;
+    color: #f0f0f0; /* Light text color for main title */
     margin-bottom: 30px;
+    text-align: center; /* Ensure h1 is centered */
+    width: 100%; /* Ensure h1 takes full width to be centered effectively */
+    max-width: 1200px; /* Match max-width of grid for consistency */
 }
 
 #course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
-    gap: 15px;
+    display: flex; /* Change to flex for better control over inner blocks */
+    flex-direction: column; /* Stack semesters vertically */
+    align-items: center; /* Center semester containers and titles horizontally */
+    gap: 20px; /* Space between semesters */
     width: 90%;
     max-width: 1200px;
+    /* Remove grid-template-columns from here as semester-container will handle it */
+}
+
+h2 {
+    width: 100%;
+    text-align: center; /* IMPORTANT: Center the semester title text */
+    color: #cccccc; /* Slightly darker light color for semester titles */
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-left: 0; /* Remove padding-left to allow full centering */
+    border-bottom: 2px solid #555; /* Darker border for the line under semester title */
+    padding-bottom: 5px;
+}
+
+/* Styling for semester containers to organize the grid */
+.semester-container {
+    display: grid; /* Keep grid display for the course cells within the semester */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    width: 100%; /* Important: Take full width of its parent (#course-grid) */
+    margin-bottom: 0; /* No margin-bottom here, gap on #course-grid handles spacing */
+    border: 1px solid #444; /* Darker border around each semester container */
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #222; /* Darker background for semester containers */
 }
 
 .course-cell {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    /* Default cell styles, adjusted for dark mode */
+    background-color: #333; /* Darker default cell background */
+    color: #f0f0f0; /* Default text color for cells */
+    border: 1px solid #555; /* Darker border */
     border-radius: 8px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Slightly more prominent shadow on dark background */
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -35,70 +67,52 @@ h1 {
     min-height: 80px; /* Ensure consistent height */
 }
 
-/* Course Category Colors */
+/* Course Category Colors - Adjusted for Dark Mode */
 .mathematics {
-    background-color: #add8e6; /* Light Blue */
+    background-color: #6a5acd; /* Deeper purple-blue */
+    color: #f0f0f0; /* Light text for contrast */
 }
 
 .electrical-engineering {
-    background-color: #fffacd; /* Light Yellow */
+    background-color: #ffd700; /* Gold */
+    color: #333; /* Dark text on bright yellow */
 }
 
 .physics {
-    background-color: #87ceeb; /* Sky Blue */
+    background-color: #4682b4; /* Steel Blue */
+    color: #f0f0f0; /* Light text for contrast */
 }
 
 .other {
-    background-color: #d3d3d3; /* Light Gray */
+    background-color: #696969; /* Dim gray */
+    color: #f0f0f0; /* Light text for contrast */
 }
 
 /* Style for completed courses */
 .course-cell.completed {
     text-decoration: line-through;
     opacity: 0.6;
-    background-color: #e0e0e0;
-    border-color: #bbb;
+    background-color: #4a4a4a; /* Darker completed state */
+    border-color: #666;
+    color: #ccc; /* Slightly faded text for completed */
 }
 
+/* Hover effect */
 .course-cell:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* More prominent shadow on hover */
 }
-/* ... (previous CSS rules) ... */
 
+/* Style for locked courses */
 .course-cell.locked {
-    background-color: #f0f0f0; /* Lighter gray to indicate locked */
-    color: #999; /* Faded text */
-    cursor: not-allowed; /* Change cursor to "not allowed" */
-    border-style: dashed; /* Dashed border for locked courses */
+    background-color: #1a1a1a; /* Even darker for locked */
+    color: #666; /* Very faded text */
+    cursor: not-allowed;
+    border-style: dashed;
+    border-color: #333; /* Darker dashed border */
     opacity: 0.8;
 }
 
 .course-cell.locked:hover {
     transform: none; /* Prevent hover effect on locked courses */
     box-shadow: none;
-}
-
-/* New: Styling for semester containers to organize the grid */
-.semester-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    width: 100%; /* Take full width of parent */
-    margin-bottom: 30px; /* Space between semesters */
-    border: 1px solid #eee; /* Light border around each semester */
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #fafafa;
-}
-
-h2 {
-    width: 100%; /* Make semester titles span full width */
-    text-align: left;
-    color: #cccccc;
-    margin-top: 20px;
-    margin-bottom: 15px;
-    padding-left: 10px;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
-}
